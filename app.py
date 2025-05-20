@@ -8,7 +8,12 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER,exist_ok=True)
 
 app = Flask(__name__)
-CORS(app,origins=["http://localhost:3000","https://enchanting-cassata-963cc5.netlify.app"])
+#CORS(app,origins=["http://localhost:3000","https://enchanting-cassata-963cc5.netlify.app"])
+CORS(app, origins=[
+    "http://localhost:3000",
+    "https://enchanting-cassata-963cc5.netlify.app"
+])
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 @app.route("/")
