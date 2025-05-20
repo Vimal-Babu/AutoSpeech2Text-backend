@@ -11,6 +11,10 @@ app = Flask(__name__)
 CORS(app,origins=["http://localhost:3000"])
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
+@app.route("/")
+def home():
+    return "Backend is live!"
+
 @app.route("/transcribe", methods = ["POST"])
 def upload_file():
     if "file" not in request.files:
