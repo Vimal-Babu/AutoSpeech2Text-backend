@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# Pytest
+.cache/
+
+# Logs and temp files
+*.log
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+
+# Mac / Windows / Linux junk
+.DS_Store
+Thumbs.db
