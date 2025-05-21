@@ -8,22 +8,28 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER,exist_ok=True)
 
 app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": [
-#     "http://localhost:3000",
-#     "https://enchanting-cassata-963cc5.netlify.app"
-# ]}})
 
-CORS(app,supports_credentials=True,origins="*")
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+@app.after_request
+def apply_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+    return response
 
 @app.route("/")
 def home():
     return "Backend is live!"
 
-@app.route("/transcribe", methods = ["POST"])
+@app.route("/transcribe", methods = ["POST","OPTIONS"])
 def upload_file():
+    if request.method == "OPTIONS":
+        return '',204
+    
     if "file" not in request.files:
         return jsonify({"error":"No file uploaded"}), 400
     
@@ -37,6 +43,15 @@ def upload_file():
         return jsonify({"transcription": transcription })
     except Exception as e :
         return jsonify({"error":str(e)}), 500
+    
+@app.route("/transcribe", methods=["POST", "OPTIONS"])
+def upload_file():
+    if request.method == "OPTIONS":
+        return '', 204  # handle preflight
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=False)
