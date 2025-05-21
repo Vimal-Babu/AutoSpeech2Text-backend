@@ -44,10 +44,7 @@ def upload_file():
     except Exception as e :
         return jsonify({"error":str(e)}), 500
     
-@app.route("/transcribe", methods=["POST", "OPTIONS"])
-def upload_file():
-    if request.method == "OPTIONS":
-        return '', 204  # handle preflight
+
 
 
 
