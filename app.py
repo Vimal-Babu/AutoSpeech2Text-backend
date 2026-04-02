@@ -14,12 +14,12 @@ CORS(app, resources={r"/*": {"origins": ["https://enchanting-cassata-963cc5.netl
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-@app.after_request
-def apply_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
-    return response
+#@app.after_request
+#def apply_cors_headers(response):
+ #   response.headers["Access-Control-Allow-Origin"] = "*"
+  #  response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+   # response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+    #return response
 
 @app.route("/")
 def home():
