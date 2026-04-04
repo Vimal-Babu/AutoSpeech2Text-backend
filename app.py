@@ -8,22 +8,15 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER,exist_ok=True)
 
 app = Flask(__name__)
+
 CORS(app, resources={r"/*": {"origins": [
     "https://enchanting-cassata-963cc5.netlify.app",
     "http://localhost:3000"
-]}}, supports_credentials=True)
-
-#CORS(app, resources={r"/*": {"origins": ["https://enchanting-cassata-963cc5.netlify.app"]}}, supports_credentials=True)
-
+]}})
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-#@app.after_request
-#def apply_cors_headers(response):
- #   response.headers["Access-Control-Allow-Origin"] = "*"
-  #  response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-   # response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
-    #return response
+
 
 @app.route("/")
 def home():
@@ -48,10 +41,6 @@ def upload_file():
     except Exception as e :
         return jsonify({"error":str(e)}), 500
     
-
-
-
-
 
 
 if __name__ == "__main__":
